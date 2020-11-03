@@ -1,0 +1,21 @@
+function Ship(length, isHit, isSunk){
+    this.length = length;
+    this.isHit = isHit;
+    this.isSunk = isSunk;
+    this.health = makeHealth(length);
+
+    function makeHealth(length){
+        let healthArr = []
+        for(let x = 0; x < length; x++){
+            healtherArr = healthArr.push({position: x+1, isHit: false});
+        }
+        return healthArr;
+    }
+}
+
+Ship.prototype.hit = (int) => {
+    this.health[int].isHit = true;
+    return "Hit!";
+}
+
+module.exports = Ship;
