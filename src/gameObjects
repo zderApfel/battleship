@@ -1,3 +1,5 @@
+const { ModuleFilenameHelpers } = require("webpack");
+
 function Ship(length, isHit, isSunk){
     this.length = length;
     this.isHit = isHit;
@@ -6,8 +8,13 @@ function Ship(length, isHit, isSunk){
 
     Ship.prototype.hit = (int) => {
         this.health[int] = true;
-        return this.health;
-    }    
+        if(this.health.includes(false)){
+            this.isHit = true
+        }
+        else{
+            this.isSunk = true
+        }
+    }
 
     function makeHealth(length){
         let healthArr = []
@@ -17,4 +24,6 @@ function Ship(length, isHit, isSunk){
         return healthArr;
     }
 }
+
+
 module.exports = Ship;
