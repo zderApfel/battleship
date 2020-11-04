@@ -4,18 +4,17 @@ function Ship(length, isHit, isSunk){
     this.isSunk = isSunk;
     this.health = makeHealth(length);
 
+    Ship.prototype.hit = (int) => {
+        this.health[int] = true;
+        return this.health;
+    }    
+
     function makeHealth(length){
         let healthArr = []
         for(let x = 0; x < length; x++){
-            healtherArr = healthArr.push({position: x+1, isHit: false});
+            healtherArr = healthArr.push(false);
         }
         return healthArr;
     }
 }
-
-Ship.prototype.hit = (int) => {
-    this.health[int].isHit = true;
-    return "Hit!";
-}
-
 module.exports = Ship;
