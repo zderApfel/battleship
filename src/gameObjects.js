@@ -3,24 +3,24 @@ function Ship(name, length, isHit, isSunk){
     this.length = length;
     this.isHit = isHit;
     this.isSunk = isSunk;
-    this.health = makeHealth(length);
+    this.health = makeHealth(length)
 
-    Ship.prototype.hit = (int) => {
-        this.health[int] = true;
-        if(this.health.includes(false)){
-            this.isHit = true
-        }
-        else{
-            this.isSunk = true
-        }
-    }
-
-    function makeHealth(length){
-        let healthArr = []
-        for(let x = 0; x <= length; x++){
-            healtherArr = healthArr.push(false);
+    function makeHealth(int){
+        let healthArr = [];
+        for(let x = 0; x < int; x++){
+          healthArr.push(false);
         }
         return healthArr;
+    }
+}
+
+Ship.prototype.hit = function(int){
+    this.health[int] = true;
+    if(this.health.includes(false)){
+        this.isHit = true
+    }
+    else{
+        this.isSunk = true
     }
 }
 
@@ -30,10 +30,9 @@ function Gameboard(){
         this.coordinate = row + column;
         this.isOccupied = isOccupied;
         this.isHit = isHit;
-
-        Cell.prototype.occupy = () => {
-            this.isOccupied = true;
-        }
+    }
+    Cell.prototype.occupy = function(){
+        this.isOccupied = true;
     }
     this.cells = makeCells();
     function makeCells(){
@@ -50,11 +49,6 @@ function Gameboard(){
         }
         return cellArr;
     }
-    Gameboard.prototype.placeShip = (direction, ship) => {
-        
-    }
 }
-
-console.log(new Gameboard);
 
 module.exports = Ship, Gameboard;
