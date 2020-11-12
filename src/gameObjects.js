@@ -1,8 +1,8 @@
-function Ship(name, length, isHit, isSunk){
+function Ship(name, length){
     this.name = name;
     this.length = length;
-    this.isHit = isHit;
-    this.isSunk = isSunk;
+    this.isHit = false;
+    this.isSunk = false;
     this.health = makeHealth(length)
     this.coordinates = [];
 
@@ -25,7 +25,7 @@ Ship.prototype.hit = function(int){ //Function that hits a ship, marking it as s
     }
 }
 
-Ship.prototype.place = function(base, direction){
+Ship.prototype.place = function(base, direction, board){
     switch(direction){
         case "x+":
             for(let x = 0; x < this.length; x++){
@@ -48,19 +48,20 @@ Ship.prototype.place = function(base, direction){
             }
             break;
     }
+    for(let x = 0; x < this.coordinates.length; x++){
+        let y = this.coordinates[x];
+        board.cells[y].isOccupied = true;
+    }
 }
 
 function Gameboard(){
+    this.cells = makeCells();
     function Cell(id, row, column, isOccupied, isHit){
         this.id = id
         this.coordinate = row + column;
         this.isOccupied = isOccupied;
         this.isHit = isHit;
     }
-    Cell.prototype.occupy = function(){
-        this.isOccupied = true;
-    }
-    this.cells = makeCells();
     function makeCells(){
         let cellArr = [];
         let alphaArray = ['a','b','c','d','e','f','g','h','i','j'];
@@ -77,4 +78,4 @@ function Gameboard(){
     }
 }
 
-module.exports = Ship, Gameboard;
+module.exports = { Ship, Gameboard };
