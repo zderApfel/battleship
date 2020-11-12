@@ -4,6 +4,7 @@ function Ship(name, length, isHit, isSunk){
     this.isHit = isHit;
     this.isSunk = isSunk;
     this.health = makeHealth(length)
+    this.coordinates = [];
 
     function makeHealth(int){
         let healthArr = [];
@@ -14,13 +15,38 @@ function Ship(name, length, isHit, isSunk){
     }
 }
 
-Ship.prototype.hit = function(int){
+Ship.prototype.hit = function(int){ //Function that hits a ship, marking it as sunk if all its health is gone
     this.health[int] = true;
     if(this.health.includes(false)){
         this.isHit = true
     }
     else{
         this.isSunk = true
+    }
+}
+
+Ship.prototype.place = function(base, direction){
+    switch(direction){
+        case "x+":
+            for(let x = 0; x < this.length; x++){
+                this.coordinates.push(base + x);
+            }
+            break;
+        case "x-":
+            for(let x = 0; x < this.length; x++){
+                this.coordinates.push(base - x);
+            }
+            break;
+        case "y+":
+            for(let x = 0; x < this.length; x++){
+                this.coordinates.push(base + (x*10));
+            }
+            break;
+        case "y-":
+            for(let x = 0; x < this.length; x++){
+                this.coordinates.push(base - (x*10));
+            }
+            break;
     }
 }
 

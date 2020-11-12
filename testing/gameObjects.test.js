@@ -26,12 +26,14 @@ test.skip("Test if a ship is sunk", () => {
     expect(testShip.isSunk).toStrictEqual(true)
 })
 
-test("Test if a ship not sunk after being hit twice", () => {
+test.skip("Test if a ship not sunk after being hit twice", () => {
     testShip.hit(0);
     testShip.hit(2);
     expect(testShip.isSunk).toStrictEqual(false)
 })
 
-test.skip("Adds a ship to a game board", () => {
-    expect(testBoard.placeShip("horizontal", ))
+test("Place a ship on a gameboard", () => { //Make coordinates for a boat. No consideration for out of bounds yet
+    testShip.place(32, "x+");
+    expect(testShip.coordinates).toStrictEqual([32,33,34]);
 })
+
